@@ -46,10 +46,7 @@ dataset/
 Visualization/
 |
 ├── confusion_matrix.png
-├── roc_curve.png
-├── feature_importance.png
-├── cross_validation.png
-├── traffic_pie.png
+├── trafficdistribution.png
 └── detection_count.png
 ```
 
