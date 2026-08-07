@@ -36,10 +36,15 @@ The network topology is created using Mininet with Open vSwitch switches control
 lfa-detection-sdn/
 │
 ├── topology.py
-├── lfa_detector.py
-├── ml_detect.py
 ├── visualize.py
+├── ml_detect.py
+
+dataset/
+|
 ├── ICMP_ATTACK_DATASET.csv
+
+Visualization/
+|
 ├── confusion_matrix.png
 ├── roc_curve.png
 ├── feature_importance.png
