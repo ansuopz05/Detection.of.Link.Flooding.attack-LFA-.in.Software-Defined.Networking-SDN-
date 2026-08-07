@@ -35,17 +35,17 @@ The network topology is created using Mininet with Open vSwitch switches control
 ```
 lfa-detection-sdn/
 │
-├── docs/
-├── topology/
-├── ryu/
-├── scripts/
-├── dataset/
-├── ml/
-├── results/
-├── images/
-├── README.md
-├── requirements.txt
-└── LICENSE
+├── topology.py
+├── lfa_detector.py
+├── ml_detect.py
+├── visualize.py
+├── ICMP_ATTACK_DATASET.csv
+├── confusion_matrix.png
+├── roc_curve.png
+├── feature_importance.png
+├── cross_validation.png
+├── traffic_pie.png
+└── detection_count.png
 ```
 
 ---
@@ -90,13 +90,6 @@ The bottleneck link is created between **Switch s2 and Switch s3** to simulate n
 ---
 
 ## Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/ansuopz05/lfa-detection-sdn.git
-cd lfa-detection-sdn
-```
 
 ### Install Dependencies
 #### Update the system:
@@ -158,9 +151,10 @@ sudo docker pull osrg/ryu
 ### Install Python Libraries
 
 ```bash
-pip install -r requirements.txt
+pip3 install pandas scikit-learn \
+matplotlib seaborn numpy \
+--break-system-packages
 ```
-
 ---
 
 ## Running the Project
@@ -168,13 +162,21 @@ pip install -r requirements.txt
 ### 1. Start the Ryu Controller
 
 ```bash
-ryu-manager ryu/app/simple_switch_13.py
+sudo docker run -it \
+--network host \
+osrg/ryu \
+ryu-manager ryu.app.simple_switch_13
 ```
 
-or run using Docker.
-
 ### 2. Start Mininet
-
+```bash
+sudo mn \
+--topo linear,4 \
+--controller remote,ip=127.0.0.1,port=6633 \
+--switch ovsk,protocols=OpenFlow13 \
+--link tc,bw=10
+```
+Run topology.py
 ```bash
 sudo python3 topology/topology.py
 ```
